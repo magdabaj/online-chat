@@ -1,0 +1,45 @@
+{
+  "name": "online-chat",
+  "version": "1.0.0",
+  "description": "React, Typescript, Node, Socket.IO",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open --mode development ",
+    "build": "webpack --mode production --history-api-fallback",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magdabaj/online-chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/magdabaj/online-chat/issues"
+  },
+  "homepage": "https://github.com/magdabaj/online-chat#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/lodash": "^4.14.157",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "source-map-loader": "^1.0.1",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "babel-loader": "^8.1.0",
+    "lodash": "^4.17.19",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "ts-loader": "^8.0.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

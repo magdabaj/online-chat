@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import openSocket from 'socket.io-client'
 import {useState} from "react";
 
@@ -29,7 +29,7 @@ export const Main: React.FC<IMainProps> = ({ Title, Image, Body}) =>
 
     return (
         <div>
-            <h2>Chat Message</h2>
+            <Typography variant={"h3"} color={'primary'}>Hello world</Typography>
             <div>
                 {allMessages.map(message => {
                     return <div >{message}</div>

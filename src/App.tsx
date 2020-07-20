@@ -6,14 +6,13 @@ import HomePage from "./components/HomePage";
 import {FC} from "react";
 import NotFoundPage from "./components/NotFoundPage";
 import Navigation from "./components/Navigation";
-export interface HelloProps { compiler: string; framework: string; }
 
 export const App:FC = () => {
     return (
         <div>
             <Navigation/>
             <Switch>
-                <Route path={"/"} component={Login}/>
+                <Route path={"/"} component={Login} exact/>
                 <Route path={"/register"} component={Register}/>
                 <Route path={"/user"} component={HomePage}/>
                 <Route component={NotFoundPage}/>

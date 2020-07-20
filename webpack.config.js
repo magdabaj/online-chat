@@ -1,29 +1,36 @@
-// const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
 module.exports = {
-    entry:  path.resolve(__dirname, './src/index.tsx'),
+    entry: {
+        app: ['./src/index.tsx'],
+        vendor: ['react', 'react-dom']
+    },
     devtool: 'source-map',
     module: {
         rules: [
             {
-                test: [/\.js$/],
-                exclude: /node_modules/,
-                loader: ['babel-loader', 'eslint-loader'],
-            },
-            {
-                test: /\.(ts|tsx)$/,
-                exclude: [/node_modules/, /\.test.(ts|tsx)$/],
-                loader: ['babel-loader', 'ts-loader'],
-            },
-            {
-                enforce: "pre",
-                test: /\.js$/,
-                loader: "source-map-loader"
+                test: /\.tsx?$/,
+                loader: "awesome-typescript-loader"
             }
+            // {
+            //     test: [/\.js$/],
+            //     exclude: /node_modules/,
+            //     loader: ['babel-loader', 'eslint-loader'],
+            // },
+            // {
+            //     test: /\.(ts|tsx)$/,
+            //     exclude: [/node_modules/, /\.test.(ts|tsx)$/],
+            //     loader: ['babel-loader', 'ts-loader'],
+            // },
+            // {
+            //     enforce: "pre",
+            //     test: /\.js$/,
+            //     loader: "source-map-loader"
+            // }
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js', 'jsx' ,'.json'],
     },
     output: {
         publicPath: "/",
@@ -31,16 +38,16 @@ module.exports = {
         chunkFilename: "static/chunk.[chunkhash].js",
         path: path.resolve(__dirname, 'dist'),
     },
-    // plugins: [
-    //     new HtmlWebPackPlugin({
-    //         template: "./src/index.html",
-    //         filename: "index.html"
-    //     })
-    // ],
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
+    plugins: [
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: "index.html"
+        })
+    ],
+    // externals: {
+    //     "react": "React",
+    //     "react-dom": "ReactDOM"
+    // },
     devServer: {
         historyApiFallback: true,
         open: false,

@@ -8,6 +8,8 @@
   },
   "include": [
     "**/*.ts"
+//    "./connectPgClient.ts",
+//    "src"
   ],
   "exclude": [
     "../../node_modules"

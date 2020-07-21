@@ -16,7 +16,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin,
+                    MiniCssExtractPlugin.loader,
                     'css-loader'
                 ]
             }
@@ -51,7 +51,10 @@ module.exports = {
             template: "./src/index.html",
             filename: "index.html"
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'bundle.[hash].css',
+            chunkFilename: 'chunk.[chunkhash].css',
+        }),
     ],
     // externals: {
     //     "react": "React",

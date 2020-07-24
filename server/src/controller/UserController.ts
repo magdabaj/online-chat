@@ -8,18 +8,21 @@ export class UserController {
     private userRepository = getRepository(User);
 
     static listAll = async (req: Request, res: Response) => {
-        return await User.find({
+        const users = await User.find({
             select: ['id', 'email']
         })
+
+        res.send(users)
     }
 
     static getOneById = async (req: Request, res: Response) => {
-        const id: number = parseInt(req.params.id);
+        const id = req.params.id;
 
         try {
             const user = await User.findOneOrFail(id, {
                 select: ['id', 'email'],
             })
+            res.status(200).send(user)
         } catch (e) {
             res.status(404).send('User not found')
         }
@@ -75,6 +78,7 @@ export class UserController {
             await User.save(user)
         } catch (e) {
             res.status(409).send('email already in use')
+            return;
         }
 
         res.status(204).send('User updated')

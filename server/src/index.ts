@@ -1,19 +1,21 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import * as express from "express";
+import * as express from 'express'
+import {Response, Request, Router} from "express";
 import * as bodyParser from "body-parser";
 import * as cors from 'cors';
 import * as helmet from "helmet";
-import {Request, Response} from "express";
 import routes from "./routes/index";
 import {User} from "./entity/User";
 
 createConnection().then(async connection => {
-
     // create express app
     const app: express.Application = express();
+    app.use(Router)
     app.use(bodyParser.json());
-    app.use(cors());
+    app.use(cors({
+        origin: 'http://localhost:5000/'
+    }));
     app.use(helmet())
     app.use('/', routes)
 
@@ -34,18 +36,23 @@ createConnection().then(async connection => {
     // ...
 
     // start express server
-    app.listen(3000);
+    app.listen(3000, () => {
+        console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+    });
 
     // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-        email: "Timber",
-        password: "Timber",
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        email: "Phantom",
-        password: "Phantom",
-    }));
+    // await connection.manager.save(connection.manager.create(User, {
+    //     email: "Timber",
+    //     password: "Timber",
+    // }));
+    // await connection.manager.save(connection.manager.create(User, {
+    //     email: "Phantom",
+    //     password: "Phantom",
+    // }));
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+    await User.create({
+        email: 'magda',
+        password: 'magda'
+    })
 
 }).catch(error => console.log(error));

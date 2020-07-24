@@ -6,7 +6,7 @@ import * as bcrypt from 'bcryptjs'
     name: 'user'
 })
 @Unique(['email'])
-export class User extends BaseEntity{
+export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;

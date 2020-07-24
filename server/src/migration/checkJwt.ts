@@ -3,7 +3,8 @@ import * as jwt from 'jsonwebtoken';
 import { secret } from "../secrets/secret";
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
-    let token: string = <string>req.headers['authorization']
+    let token: string = req.headers['authorization']
+    // let token: string = <string>req.get('authorization')
     let jwtPayload;
 
     try {

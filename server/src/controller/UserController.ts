@@ -4,31 +4,28 @@ import {User} from "../entity/User";
 import {validate} from "class-validator";
 
 export class UserController {
-
     private userRepository = getRepository(User);
 
-    static listAll = async (req: Request, res: Response) => {
-        const users = await User.find({
+    async all(req: Request, res: Response) {
+        return this.userRepository.find({
             select: ['id', 'email']
         })
-
-        res.send(users)
     }
 
-    static getOneById = async (req: Request, res: Response) => {
+    async one(req: Request, res: Response) {
         const id = req.params.id;
 
         try {
-            const user = await User.findOneOrFail(id, {
+             return this.userRepository.findOneOrFail(id, {
                 select: ['id', 'email'],
             })
-            res.status(200).send(user)
+
         } catch (e) {
             res.status(404).send('User not found')
         }
     }
 
-    static newUser = async (req: Request, res:Response) => {
+    async save(req: Request, res:Response) {
         let { email, password, role} = req.body;
         let user = new User();
         user.email = email;
@@ -43,7 +40,7 @@ export class UserController {
         user.hashPassword();
 
         try {
-            await User.save(user)
+            await this.userRepository.save(user)
         } catch (e) {
             res.status(409).send('email already in use');
             return;
@@ -52,22 +49,22 @@ export class UserController {
         res.status(201).send('User created')
     }
 
-    static editUser = async (req: Request, res: Response) => {
+    async update(req: Request, res: Response) {
         const id = req.params.id;
 
         const { email, role } = req.body;
 
-        let user;
+        let user: User;
 
         try {
-            user = await User.findOneOrFail(id);
+            user = await this.userRepository.findOneOrFail(id);
         } catch (e) {
             res.status(404).send('User not found')
             return;
         }
 
         user.email = email;
-        user.role  = role;
+        // user.role  = role;
         const errors = await validate(user)
         if (errors.length > 0) {
             res.status(400).send(errors)
@@ -75,7 +72,7 @@ export class UserController {
         }
 
         try {
-            await User.save(user)
+            await this.userRepository.save(user)
         } catch (e) {
             res.status(409).send('email already in use')
             return;
@@ -84,18 +81,18 @@ export class UserController {
         res.status(204).send('User updated')
     }
 
-    static deleteUser = async (req: Request, res: Response) => {
+    async remove(req: Request, res: Response) {
         const id = req.params.id;
 
         let user: User;
         try {
-            user = await User.findOneOrFail(id);
+            user = await this.userRepository.findOneOrFail(id);
         } catch (e) {
             res.status(404).send('User not found')
             return;
         }
 
-        await User.delete(id)
+        await this.userRepository.delete(id)
         res.status(204).send('User deleted')
     }
 

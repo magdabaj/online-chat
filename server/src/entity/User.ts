@@ -2,11 +2,9 @@ import {Entity, PrimaryGeneratedColumn, Column, Unique, BaseEntity} from "typeor
 import {Length} from "class-validator";
 import * as bcrypt from 'bcryptjs'
 
-@Entity({
-    name: 'user'
-})
+@Entity()
 @Unique(['email'])
-export class User extends BaseEntity {
+export class User {
 
     @PrimaryGeneratedColumn()
     id: number;

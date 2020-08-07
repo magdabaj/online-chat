@@ -19,7 +19,15 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'css-loader'
                 ]
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif|jpg)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                    },
+                ],
+            },
             // {
             //     test: [/\.js$/],
             //     exclude: /node_modules/,

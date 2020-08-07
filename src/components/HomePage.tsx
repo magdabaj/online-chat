@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import {Typography} from "@material-ui/core";
+import {Typography, Grid} from "@material-ui/core";
+import ChatButton from "./ChatButton/ChatButton";
 
 const useStyles = makeStyles({
     helloThereStyles : {
@@ -16,7 +17,10 @@ const HomePage:FC = () => {
             variant={"h2"}
             color={"primary"}
         >
-            Home Page
+            {/*Home Page*/}
+            <Grid item>
+                <ChatButton/>
+            </Grid>
         </Typography>
         )
 }

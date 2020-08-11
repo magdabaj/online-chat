@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {FC, PureComponent, SFC} from 'react';
 import { Theme, createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-// import * as halcyon from '../../utils/images/halcyon.jpg'
+import Chip from '@material-ui/core/Chip';
+import halcyon from '../../utils/images/halcyon.jpg'
+import {PADDING} from "../../utils/styles/padding";
+import {ChatListItemInterface} from "./ChatListItemInterface";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -19,7 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
             flex: '1 0 auto',
         },
         cover: {
-            width: 151,
+            width: 80,
+            margin: PADDING.LARGE,
+            borderRadius: '50%',
         },
         controls: {
             display: 'flex',
@@ -31,10 +36,17 @@ const useStyles = makeStyles((theme: Theme) =>
             height: 38,
             width: 38,
         },
+        emptyDiv: {
+            width: PADDING.LARGE
+        },
+        notifyDiv: {
+            display: 'flex',
+            alignItems: 'center'
+        }
     }),
 );
 
-export default function ChatButton() {
+const ChatListItem: SFC<ChatListItemInterface> = ({messages}) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -42,7 +54,7 @@ export default function ChatButton() {
         <Card className={classes.root}>
             <CardMedia
                 className={classes.cover}
-                image={"../../utils/images/halcyon.jpg"}
+                image={halcyon}
                 title="Live from space album cover"
             />
             <div className={classes.details}>
@@ -50,11 +62,22 @@ export default function ChatButton() {
                     <Typography component="h6" variant="h6">
                         Contact Name
                     </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        latest message
+                    </Typography>
                     <Typography variant="subtitle2" color="textSecondary">
-                        lastest message
+                        09.08.2020 9:17
                     </Typography>
                 </CardContent>
+            </div>
+            <div className={classes.emptyDiv}/>
+            <div className={classes.notifyDiv}>
+                {messages > 0 ?
+                <Chip color={'secondary'} label={messages} size={'small'}/> :
+                    null}
             </div>
         </Card>
     );
 }
+
+export default ChatListItem

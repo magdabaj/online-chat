@@ -21,28 +21,13 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpe?g|gif|jpg)$/i,
+                test: /\.(jpg|png|svg)$/,
                 use: [
                     {
-                        loader: 'url-loader',
-                    },
-                ],
+                        loader: 'file-loader',
+                    }
+                ]
             },
-            // {
-            //     test: [/\.js$/],
-            //     exclude: /node_modules/,
-            //     loader: ['babel-loader', 'eslint-loader'],
-            // },
-            // {
-            //     test: /\.(ts|tsx)$/,
-            //     exclude: [/node_modules/, /\.test.(ts|tsx)$/],
-            //     loader: ['babel-loader', 'ts-loader'],
-            // },
-            // {
-            //     enforce: "pre",
-            //     test: /\.js$/,
-            //     loader: "source-map-loader"
-            // }
         ]
     },
     resolve: {

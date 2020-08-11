@@ -32,7 +32,7 @@ const Navigation: FC = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        News
+                        Chat
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>

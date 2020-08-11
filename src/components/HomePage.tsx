@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import {Typography, Grid} from "@material-ui/core";
-import ChatButton from "./ChatButton/ChatButton";
+import {Typography, Grid, Paper} from "@material-ui/core";
+import ChatListComponent from "./ChatListComponent/ChatListComponent";
 
 const useStyles = makeStyles({
     helloThereStyles : {
@@ -12,16 +12,17 @@ const useStyles = makeStyles({
 const HomePage:FC = () => {
     const classes = useStyles();
     return (
-        <Typography
-            className={classes.helloThereStyles}
-            variant={"h2"}
-            color={"primary"}
-        >
-            {/*Home Page*/}
-            <Grid item>
-                <ChatButton/>
+        <Grid item container direction={"column"} xs={12} sm={4} lg={3}>
+            <Grid item >
+                <ChatListComponent messages={2}/>
             </Grid>
-        </Typography>
+            <Grid item >
+                <ChatListComponent messages={4}/>
+            </Grid>
+            <Grid item >
+                <ChatListComponent messages={0}/>
+            </Grid>
+        </Grid>
         )
 }
 

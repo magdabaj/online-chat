@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import halcyon from '../../utils/images/halcyon.jpg'
 import {PADDING} from "../../utils/styles/padding";
-import {ChatListComponentInterface} from "./ChatListComponentInterface";
+import {ChatItemComponentInterface} from "./ChatItemComponentInterface";
 import {Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Paper} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const ChatListComponent: SFC<ChatListComponentInterface> = ({messages}) => {
+const ChatItemComponent: SFC<ChatItemComponentInterface> = ({messages}) => {
     const classes = useStyles(messages);
 
     return (
@@ -75,4 +75,4 @@ const ChatListComponent: SFC<ChatListComponentInterface> = ({messages}) => {
     );
 }
 
-export default ChatListComponent
+export default ChatItemComponent

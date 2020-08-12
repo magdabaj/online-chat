@@ -1,4 +1,4 @@
-import React, {FC, PureComponent, SFC} from 'react';
+import React, {FC, PureComponent, SFC, useState} from 'react';
 import { Theme, createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
@@ -6,6 +6,7 @@ import halcyon from '../../utils/images/halcyon.jpg'
 import {PADDING} from "../../utils/styles/padding";
 import {ChatItemComponentInterface} from "./ChatItemComponentInterface";
 import {Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Paper} from "@material-ui/core";
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,11 +28,15 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const ChatItemComponent: SFC<ChatItemComponentInterface> = ({messages}) => {
+const ChatItemComponent: FC<ChatItemComponentInterface> = ({messages, userId}) => {
     const classes = useStyles(messages);
+    const [goToChat, setGoToChat] = useState(false)
 
     return (
-        <List className={classes.root}>
+        <List
+            className={classes.root}
+            onClick={() => setGoToChat(!goToChat)}
+        >
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                     <Avatar alt="Cindy Baker" src={halcyon} />
@@ -71,6 +76,7 @@ const ChatItemComponent: SFC<ChatItemComponentInterface> = ({messages}) => {
                 </ListItemText>
             </ListItem>
             <Divider variant="inset" component="li" />
+            {goToChat && <Redirect to={`/user/${userId}`}/>}
         </List>
     );
 }

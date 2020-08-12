@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom"
-import Login from "./components/Login/Login";
-import Register from "./components/Register";
-import HomePage from "./components/HomePage";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import HomePage from "./pages/HomePage/HomePage";
 import {FC} from "react";
-import NotFoundPage from "./components/NotFoundPage";
-import Navigation from "./components/Navigation/Navigation";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import Navigation from "./pages/Navigation/Navigation";
 import {Grid} from "@material-ui/core";
-import ChatPage from "./components/ChatPage/ChatPage";
+import ChatPage from "./pages/ChatPage/ChatPage";
 
 
 
@@ -15,7 +15,7 @@ export const App:FC = () => {
     return (
             <Grid container direction={"column"}>
                 <Grid item>
-                    <Navigation/>
+                    <Navigation loggedIn={true}/>
                 </Grid>
                 {/*<Grid item container>*/}
                 {/*    <Grid item xs={false} sm={2} />*/}

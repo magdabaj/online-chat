@@ -1,4 +1,5 @@
 
 export interface ChatItemComponentInterface {
-    messages: number
+    messages: number,
+    userId: number
 }

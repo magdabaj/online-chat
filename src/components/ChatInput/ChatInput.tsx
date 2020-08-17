@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import {
+    Button,
+    ButtonGroup,
     createStyles,
     FormControl,
     Grid, IconButton,
@@ -24,21 +26,49 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ChatInput = () => {
     const classes = useStyles();
+    const [message, setMessage] = useState('')
+    const [messages, addMessage] = useState([])
+    const [socket, setSocket] = useState(io('http://localhost:3000'))
+    socket.on('msgToClient', msg => receiveMessage(msg))
+
+    const receiveMessage = (message: string) => {
+        console.log('received message', message)
+        addMessage([...messages, message])
+    }
+
+    console.log(message, 'message')
+    console.log('messages', messages)
+
+    function onChange(event:any) {
+        setMessage(event.target.value)
+    }
+    
+    function sendMessage(event:any) {
+        event.preventDefault()
+        socket.emit('msgToServer', message)
+        addMessage([...messages, message])
+        setMessage('')
+    }
+
     return <div>
         <div className={classes.margin}>
             <Grid container spacing={1} alignItems={"flex-end"}>
+                <FormControl>
                 <Grid item >
                     <IconButton color={"primary"}>
                         <SendIcon/>
                     </IconButton>
                 </Grid>
                 <Grid item>
-                    <TextField
-                        id="input-with-icon-grid"
-                        multiline
-                        fullWidth
-                    />
+                        <TextField
+                            id="input-with-icon-grid"
+                            multiline
+                            fullWidth
+                            onChange={onChange}
+                            value={message}
+                        />
                 </Grid>
+                </FormControl>
             </Grid>
         </div>
     </div>

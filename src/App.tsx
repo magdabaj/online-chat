@@ -9,7 +9,7 @@ import Navigation from "./pages/Navigation/Navigation";
 import {Grid} from "@material-ui/core";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import Context from "./context";
-import reducer from "./reducer";
+import reducer from "./store/user/user.reducer";
 
 
 

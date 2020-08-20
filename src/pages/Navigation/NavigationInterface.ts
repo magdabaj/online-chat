@@ -1,3 +1,3 @@
 export interface NavigationInterface {
-    loggedIn: boolean
+    // loggedIn: boolean
 }

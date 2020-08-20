@@ -1,36 +1,33 @@
-import {UserType} from "../../context";
 import produce from "immer";
-import {UserActions, UserTypes} from "./user.types";
-import {Reducer} from "react";
-
+import {UserActions, UserTypes, UserType} from "./user.types";
 
 export type UserInitialStateType = {
-    user: UserType,
+    userData: UserType,
     error?: string,
-    isLoading: boolean
+    isLoading: boolean,
+    isAuthenticated: boolean
 }
 
 export const userInitialState = {
-    user: {
+    userData: {
         accessToken: '',
         username: ''
     },
     error: '',
-    isLoading: false
+    isLoading: false,
+    isAuthenticated: false
 }
 
-export const userReducer: Reducer<UserInitialStateType, UserActions> = (
-    state = userInitialState,
-    action
+export const userReducer = (
+    state:  UserInitialStateType = userInitialState,
+    action:UserActions
 ) => {
     return produce(state, draft => {
         switch (action.type) {
-            case UserTypes.Signin:
-                draft.isLoading = true
-                break
             case UserTypes.SigninSuccess:
-                draft.user.accessToken = action.payload.user.accessToken
+                draft.userData.accessToken = action.payload.user.accessToken
                 draft.isLoading = false
+                draft.isAuthenticated = true
                 break
             case UserTypes.Signup:
                 draft.isLoading = true
@@ -40,7 +37,10 @@ export const userReducer: Reducer<UserInitialStateType, UserActions> = (
                 break
             case UserTypes.LogoutSuccess:
                 draft.isLoading = false
+                draft.isAuthenticated = false
+                draft.userData = userInitialState.userData
                 break
+            case UserTypes.Signin:
             case UserTypes.Logout:
                 draft.isLoading = true
                 break

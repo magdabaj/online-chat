@@ -1,10 +1,7 @@
-import React, { createContext } from "react";
+import React, {createContext, Dispatch, useReducer} from "react";
 import {userInitialState, UserInitialStateType, userReducer} from "./store/user/user.reducer";
+import {UserActions} from "./store/user/user.types";
 
-export type UserType = {
-    accessToken?: string,
-    username?: string
-}
 
 type InitialStateType = {
     user: UserInitialStateType
@@ -16,19 +13,20 @@ const initialState = {
 
 const Context = createContext<{
     state: InitialStateType;
-    dispatch: React.Dispatch<any>
+    dispatch: Dispatch<UserActions>
 }>({
     state: initialState,
     dispatch: () => null
 })
 
-const mainReducer = ({user}: any, action: any) => ({
+const mainReducer = ({user}: InitialStateType, action: UserActions) => ({
     user: userReducer(user, action)
 })
 
 const AppProvider: React.FC = ({children}) => {
-    const [state, dispatch] = mainReducer(mainReducer, initialState)
+    const [state, dispatch] = useReducer(mainReducer, initialState)
 
+    console.log(state)
     return(
         <Context.Provider value={{state, dispatch}}>
             {children}

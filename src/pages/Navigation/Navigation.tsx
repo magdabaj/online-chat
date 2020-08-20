@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useContext} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +10,7 @@ import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded'
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import {Link} from 'react-router-dom';
 import {NavigationInterface} from "./NavigationInterface";
+import {Context} from "../../context";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,8 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Navigation: FC<NavigationInterface> = ({ loggedIn = false }) => {
+const Navigation: FC<NavigationInterface> = () => {
     const classes = useStyles();
+
+    const { state, dispatch } = useContext(Context);
+
+    const {user} = state
 
     return (
         <div className={classes.root}>
@@ -56,7 +61,7 @@ const Navigation: FC<NavigationInterface> = ({ loggedIn = false }) => {
                         Chat
                     </Typography>
                     <IconButton color="inherit">
-                        {loggedIn ?
+                        {user.isAuthenticated ?
                             <ExitToAppRoundedIcon/> :
                             <PersonRoundedIcon/>
                         }

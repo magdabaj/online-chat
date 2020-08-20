@@ -5,9 +5,10 @@ import {
     SignUpSuccessAction,
     UserSignIn,
     UserSignup,
-    UserTypes
+    UserTypes,
+    UserType
 } from "./user.types";
-import {UserType} from "../../context";
+
 
 export const signUp = (
     user: UserSignup

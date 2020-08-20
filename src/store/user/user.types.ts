@@ -1,4 +1,8 @@
-import {UserType} from "../../context";
+
+export type UserType = {
+    accessToken?: string,
+    username?: string
+}
 
 export type UserSignup = {
     username: string,
